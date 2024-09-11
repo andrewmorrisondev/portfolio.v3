@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Welcome to Andrew Morrison's Portfolio
 
-First, run the development server:
+This is my personal portfolio website, built using **Next.js**, **TypeScript**, **Vercel**, and **Tailwind CSS**. The website showcases my work as a software engineer, freelance web developer, musician, and features interactive code examples, chess matches, and a media gallery.
 
-```bash
+## Table of Contents
+- [Development](#development)
+- [Deployment](#deployment)
+- [Build Commands](#build-commands)
+- [Styling](#styling)
+- [Side Hustles](#side-hustles)
+- [License](#license)
+
+## Development
+
+To start the development server:
+
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This command installs dependencies and starts the development environment using Next.js and Tailwind CSS.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is hosted on Vercel. Deployment is integrated with GitHub for continuous deployment. Here's how deployment works:
 
-## Learn More
+1. Make a pull request (PR) to the \`main\` branch on GitHub.
+   
+   - The PR will trigger automated checks, including linting and building the project.
+   - Ensure the PR passes all checks before merging.
 
-To learn more about Next.js, take a look at the following resources:
+2. After the PR is merged into the \`main\` branch, Vercel will automatically redeploy the project.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Vercel monitors the \`main\` branch and will trigger a redeployment whenever there’s a successful build.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Build Commands
 
-## Deploy on Vercel
+Here are the key commands to manage the project:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Develop** (install dependencies and start the dev server):
+  \`\`\`bash
+  npm run dev
+  \`\`\`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Build the project**:
+  \`\`\`bash
+  npm run build
+  \`\`\`
+
+- **Clean build artifacts**:
+  \`\`\`bash
+  npm run clean
+  \`\`\`
+
+## Styling
+
+This project uses [Tailwind CSS](https://tailwindcss.com/) for styling. You can customize the Tailwind configuration or switch to another CSS framework if necessary.
+
+To build Tailwind for production, run:
+
+\`\`\`bash
+npm run build
+\`\`\`
+
+## Side Hustles
+
+This portfolio showcases more than just my development work. Here's what you'll find:
+
+- **Music Career**: A section highlighting my work as a musician.
+- **Chess Matches**: Replay my chess games.
+- **Interactive Code Examples**: A space for exploring interactive coding examples.
+- **Media Gallery**: Photos and videos I've captured.
+
+## License
+
+This project is open-source under the MIT License. Contributions and suggestions are welcome!
