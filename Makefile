@@ -10,12 +10,8 @@ SHELL := /bin/zsh
 .SHELLFLAGS := -c 'source ~/.zshrc && exec zsh'
 
 # Dev: Install dependencies, run the dev server and Tailwind in development mode
-dev:
-	@$(NPM) install
-	@$(TAILWIND) -i ./app/globals.css --watch &
+dev: build
 	@$(NPM) run dev
-	@npx prettier --write .
-
 
 # Build: Clean build artifacts, install dependencies, run linting, build Next.js, and Tailwind for production
 build: clean
