@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UnderConstruction Page matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex items-center justify-center min-h-screen bg-gray-900 text-gray-200"
+  >
+    <div
+      class="bg-gray-800 shadow-lg rounded-lg p-8 max-w-md text-center"
+    >
+      <h1
+        class="text-3xl font-bold mb-4 text-yellow-500"
+      >
+        🚧 Under Construction 🚧
+      </h1>
+      <p
+        class="text-gray-400 mb-6"
+      >
+        We are working hard to bring you a great experience. Check back soon!
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
