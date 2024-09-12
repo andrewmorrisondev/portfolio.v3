@@ -15,9 +15,9 @@ This is my personal portfolio website, built using **Next.js**, **TypeScript**, 
 
 To start the development server:
 
-\`\`\`bash
+```zsh
 npm run dev
-\`\`\`
+```
 
 This command installs dependencies and starts the development environment using Next.js and Tailwind CSS.
 
@@ -39,19 +39,14 @@ This project is hosted on Vercel. Deployment is integrated with GitHub for conti
 Here are the key commands to manage the project:
 
 - **Develop** (install dependencies and start the dev server):
-  \`\`\`bash
-  npm run dev
-  \`\`\`
+  ```zsh
+  make dev
+  ```
 
 - **Build the project**:
-  \`\`\`bash
-  npm run build
-  \`\`\`
-
-- **Clean build artifacts**:
-  \`\`\`bash
-  npm run clean
-  \`\`\`
+  ```zsh
+  make build
+  ```
 
 ## Styling
 
@@ -59,9 +54,9 @@ This project uses [Tailwind CSS](https://tailwindcss.com/) for styling. You can 
 
 To build Tailwind for production, run:
 
-\`\`\`bash
-npm run build
-\`\`\`
+  ```zsh
+  make build
+  ```
 
 ## Side Hustles
 
