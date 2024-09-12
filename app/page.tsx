@@ -1,6 +1,6 @@
-import './globals.css';
+import "./globals.css";
 import UnderConstruction from "./components/UnderConstruction";
 
-export default function Home() {
-  return <UnderConstruction />
+export default function Home(): JSX.Element {
+  return <UnderConstruction />;
 }
