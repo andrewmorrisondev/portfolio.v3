@@ -1,9 +1,9 @@
-
 # Welcome to Andrew Morrison's Portfolio
 
 This is my personal portfolio website, built using **Next.js**, **TypeScript**, **Vercel**, and **Tailwind CSS**. The website showcases my work as a software engineer, freelance web developer, musician, and features interactive code examples, chess matches, and a media gallery.
 
 ## Table of Contents
+
 - [Development](#development)
 - [Deployment](#deployment)
 - [Build Commands](#build-commands)
@@ -26,7 +26,7 @@ This command installs dependencies and starts the development environment using 
 This project is hosted on Vercel. Deployment is integrated with GitHub for continuous deployment. Here's how deployment works:
 
 1. Make a pull request (PR) to the \`main\` branch on GitHub.
-   
+
    - The PR will trigger automated checks, including linting and building the project.
    - Ensure the PR passes all checks before merging.
 
@@ -39,6 +39,7 @@ This project is hosted on Vercel. Deployment is integrated with GitHub for conti
 Here are the key commands to manage the project:
 
 - **Develop** (install dependencies and start the dev server):
+
   ```zsh
   make dev
   ```
@@ -54,9 +55,9 @@ This project uses [Tailwind CSS](https://tailwindcss.com/) for styling. You can 
 
 To build Tailwind for production, run:
 
-  ```zsh
-  make build
-  ```
+```zsh
+make build
+```
 
 ## Side Hustles
 

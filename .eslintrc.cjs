@@ -19,8 +19,9 @@ module.exports = {
   extends: [
     "eslint:recommended", // Use recommended ESLint rules
     "plugin:prettier/recommended", // Prettier integration for formatting
+    "next",
+    "next/core-web-vitals",
   ],
-
   overrides: [
     // React-related configurations
     {

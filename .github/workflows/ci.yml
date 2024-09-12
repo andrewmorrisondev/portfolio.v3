@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Specify the version of Node.js you're using
+          node-version: "18" # Specify the version of Node.js you're using
 
       # Install dependencies
       - name: Install dependencies
@@ -38,7 +38,7 @@ jobs:
 
   # Deploy job that depends on the test-and-lint job
   deploy:
-    needs: test-and-lint  # Only runs if test-and-lint succeeds
+    needs: test-and-lint # Only runs if test-and-lint succeeds
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -47,4 +47,4 @@ jobs:
       - name: Deploy to Vercel
         run: vercel --prod
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  # Reference the Vercel token from GitHub Secrets
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Reference the Vercel token from GitHub Secrets
