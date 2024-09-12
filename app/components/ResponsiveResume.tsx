@@ -22,7 +22,7 @@ const ResponsiveResume = (): JSX.Element => {
             <Link href="mailto:me@andrewmorrison.dev">
               me@andrewmorrison.dev
             </Link>{" "}
-            | (631) 807-2659 | New York, NY
+            | New York, NY
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
             <Link
@@ -39,14 +39,6 @@ const ResponsiveResume = (): JSX.Element => {
               rel="noopener"
             >
               LinkedIn
-            </Link>
-            |
-            <Link
-              href="http://andrewmorrison.dev"
-              target="_blank"
-              rel="noopener"
-            >
-              Portfolio
             </Link>
           </Box>
         </Box>
