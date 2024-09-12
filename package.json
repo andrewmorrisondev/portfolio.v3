@@ -10,9 +10,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "next": "14.2.10",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.0",
+    "next": "^14.2.10",
+    "pdfjs-dist": "^4.6.82",
     "react": "^18.3.1",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-pdf": "^9.1.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.25.4",
@@ -24,6 +29,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
+    "@types/pdfjs-dist": "^2.10.377",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
