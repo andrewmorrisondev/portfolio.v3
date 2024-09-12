@@ -20,6 +20,7 @@ dev:
 # Build: Clean build artifacts, install dependencies, run linting, build Next.js, and Tailwind for production
 build: clean
 	@$(NPM) install
+	@npx prettier --write .
 	@$(NPM) run lint -- --fix # Removed --config tsconfig.next.json
 	@$(NPM) run test -- -u
 	@$(NEXT) build
@@ -30,5 +31,4 @@ clean:
 	@rm -rf .next
 	@rm -rf build
 	@echo "Cleaned up build artifacts."
-	@npx prettier --write .
 
