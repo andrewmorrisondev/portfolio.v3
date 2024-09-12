@@ -20,7 +20,7 @@ describe('UnderConstruction Page', () => {
 
   it('displays the message about coming soon', () => {
     render(<UnderConstruction />);
-    const message = screen.getByText(/we’re working hard to bring you a great experience/i);
+    const message = screen.getByText(/We are working hard to bring you a great experience/i);
     expect(message).toBeInTheDocument();
   });
 

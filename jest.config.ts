@@ -1,15 +1,14 @@
-import type { Config } from '@jest/types';
-
-const config: Config.InitialOptions = {
-  preset: 'ts-jest',  // Use ts-jest to handle TypeScript and JSX/TSX files
-  testEnvironment: 'jest-environment-jsdom',  // Simulate browser environment for Jest
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
   transform: {
-    "^.+\\.[t|j]sx?$": "babel-jest"
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',  // Mock CSS imports
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.jest.json', // Use your new Jest-specific TypeScript config
+    },
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],  // Ignore node_modules
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
 };
-
-export default config;

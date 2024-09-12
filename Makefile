@@ -1,7 +1,7 @@
 # Define variables for paths and commands
 SHELL := /bin/zsh
 NPM := npm
-REMIX := npx remix
+NEXT := npx next
 TAILWIND := npx tailwindcss
 
 # Source environment at the start of the shell
@@ -15,16 +15,15 @@ dev:
 	@$(TAILWIND) -i ./app/globals.css --watch &
 	@$(NPM) run dev
 
-# Build: Clean build artifacts, install dependencies, run linting, build Remix, and Tailwind for production
+# Build: Clean build artifacts, install dependencies, run linting, build Next.js, and Tailwind for production
 build: clean
 	@$(NPM) install
-	@$(NPM) run lint -- --fix
-	@$(REMIX) build
+	@$(NPM) run lint -- --fix # Removed --config tsconfig.next.json
+	@$(NEXT) build
 	@$(TAILWIND) -i ./app/globals.css --minify
 
 # Clean build artifacts
 clean:
-	@rm -rf .vercel/output
+	@rm -rf .next
 	@rm -rf build
-	@rm -rf public/build
 	@echo "Cleaned up build artifacts."
