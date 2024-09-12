@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UnderConstruction Page matches the snapshot 1`] = `
+exports[`UnderConstruction Component matches the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="flex items-center justify-center min-h-screen bg-gray-900 text-gray-200"

@@ -6,7 +6,13 @@ type InputProps = {
   className?: string;
 };
 
-const Input: React.FC<InputProps> = ({ label, type = "text", value, onChange, className }) => (
+const Input: React.FC<InputProps> = ({
+  label,
+  type = "text",
+  value,
+  onChange,
+  className,
+}) => (
   <div className={`flex flex-col ${className}`}>
     <label>{label}</label>
     <input
@@ -17,3 +23,5 @@ const Input: React.FC<InputProps> = ({ label, type = "text", value, onChange, cl
     />
   </div>
 );
+
+export default Input;

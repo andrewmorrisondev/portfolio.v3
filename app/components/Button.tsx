@@ -8,13 +8,13 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
 };
 
-const sizeClasses: Record<NonNullable<ButtonProps['size']>, string> = {
+const sizeClasses: Record<NonNullable<ButtonProps["size"]>, string> = {
   small: "px-2 py-1 text-sm",
   medium: "px-4 py-2",
   large: "px-6 py-3 text-lg",
 };
 
-const variantClasses: Record<NonNullable<ButtonProps['variant']>, string> = {
+const variantClasses: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary: "bg-blue-500 text-white",
   secondary: "bg-gray-500 text-white",
   danger: "bg-red-500 text-white",
@@ -22,12 +22,12 @@ const variantClasses: Record<NonNullable<ButtonProps['variant']>, string> = {
 
 const Button: React.FC<ButtonProps> = ({
   onClick,
-  size = "medium",  // Default value ensures it is never undefined
-  variant = "primary",  // Default value ensures it is never undefined
+  size = "medium", // Default value ensures it is never undefined
+  variant = "primary", // Default value ensures it is never undefined
   disabled = false,
   className = "",
   children,
-  type = "button",  // Default button type is 'button'
+  type = "button", // Default button type is 'button'
 }) => {
   return (
     <button
