@@ -14,11 +14,14 @@ dev:
 	@$(NPM) install
 	@$(TAILWIND) -i ./app/globals.css --watch &
 	@$(NPM) run dev
+	@npx prettier --write .
+
 
 # Build: Clean build artifacts, install dependencies, run linting, build Next.js, and Tailwind for production
 build: clean
 	@$(NPM) install
 	@$(NPM) run lint -- --fix # Removed --config tsconfig.next.json
+	@$(NPM) run test -- -u
 	@$(NEXT) build
 	@$(TAILWIND) -i ./app/globals.css --minify
 
@@ -27,3 +30,5 @@ clean:
 	@rm -rf .next
 	@rm -rf build
 	@echo "Cleaned up build artifacts."
+	@npx prettier --write .
+
