@@ -1,5 +1,5 @@
 // biome-ignore lint/style/useImportType: <explanation>
-import React from 'react';
+import React from "react";
 
 const UnderConstruction: React.FC = () => {
   return (
