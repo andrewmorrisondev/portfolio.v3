@@ -1,3 +1,6 @@
+// biome-ignore lint/style/useImportType: <explanation>
+import React from 'react';
+
 const UnderConstruction: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-gray-200">

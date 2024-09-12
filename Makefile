@@ -12,7 +12,7 @@ SHELL := /bin/zsh
 # Dev: Install dependencies, run the dev server and Tailwind in development mode
 dev:
 	@$(NPM) install
-	@$(TAILWIND) -i ./app/tailwind.css -o ./public/build/tailwind.css --watch &
+	@$(TAILWIND) -i ./app/globals.css --watch &
 	@$(NPM) run dev
 
 # Build: Clean build artifacts, install dependencies, run linting, build Remix, and Tailwind for production
@@ -20,7 +20,7 @@ build: clean
 	@$(NPM) install
 	@$(NPM) run lint -- --fix
 	@$(REMIX) build
-	@$(TAILWIND) -i ./app/tailwind.css -o ./public/build/tailwind.css --minify
+	@$(TAILWIND) -i ./app/globals.css --minify
 
 # Clean build artifacts
 clean:
