@@ -16,7 +16,7 @@ This is my personal portfolio website, built using **Next.js**, **TypeScript**, 
 To start the development server:
 
 ```zsh
-npm run dev
+make dev
 ```
 
 This command installs dependencies and starts the development environment using Next.js and Tailwind CSS.
