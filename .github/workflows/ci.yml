@@ -74,13 +74,3 @@ jobs:
 
       - name: Accessibility Checks
         run: npx pa11y-ci
-
-  post-deployment-monitoring:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Monitoring Post-Deployment
-        run: npm run deploy-monitoring # Replace with appropriate command for Datadog/New Relic
