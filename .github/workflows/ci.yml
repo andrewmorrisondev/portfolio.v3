@@ -50,11 +50,16 @@ jobs:
           distribution: 'temurin' # Install Eclipse Temurin distribution
           java-version: '17'
 
+      - name: Verify Java Version
+        run: java -version
+
       # Run Code Quality & Maintainability via SonarCloud
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: "-X"  # Enables full debug logging
 
       # Performance budget testing using Lighthouse CI
       - name: Performance Budget Tests (Lighthouse)
