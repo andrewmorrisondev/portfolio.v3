@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -9,9 +9,8 @@ on:
       - main
 
 jobs:
-  test-and-lint:
+  cache:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,7 +18,47 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: '20' # Specify your Node.js version
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+  lint:
+    needs: cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Specify your Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run lint
+        run: npm run lint
+
+  test:
+    needs: cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Specify your Node.js version
 
       - name: Install dependencies
         run: npm install
@@ -30,13 +69,8 @@ jobs:
       - name: Run tests
         run: npm run test
 
-      - name: Run lint
-        run: npm run lint
-
       - name: Security Vulnerability Scanning
         run: npm audit --audit-level=high
 
-      - name: Performance Budget Tests (Lighthouse)
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          urls: https://staging.andrewmorrison.dev/  # Replace with your app's URL
+      - name: Accessibility Checks
+        run: npx pa11y-ci
