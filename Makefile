@@ -28,6 +28,7 @@ clean:
 	@echo "Cleaning build artifacts..."
 	@rm -rf .next
 	@rm -rf build
+	@$(NPM) test -- -u
 	@echo -e "$(GREEN)Cleaned up build artifacts$(RESET)"
 
 # Target: Run project tasks

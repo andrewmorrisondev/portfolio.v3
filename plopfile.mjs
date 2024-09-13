@@ -1,12 +1,11 @@
 export default (plop) => {
   plop.setHelper("kebab-case", function (text) {
+    // Use a single regex to replace uppercase letters with kebab-case
     return text
-      .replace(
-        /[A-Z]/g,
-        (match, index) => (index > 0 ? "-" : "") + match.toLowerCase(),
-      )
-      .replace(/^[-]+|[-]+$/g, ""); // Clean up any leading or trailing hyphens
+      .replace(/[A-Z]/g, (match, index) => (index > 0 ? "-" : "") + match.toLowerCase())
+      .replace(/^-+|-+$/g, ""); // Clean up any leading or trailing hyphens
   });
+  
 
   plop.setGenerator("component", {
     description:
