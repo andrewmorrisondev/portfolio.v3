@@ -1,6 +1,5 @@
 name: CI Pipeline
 
-# Run this workflow on push and pull requests to the main branch
 on:
   push:
     branches:
@@ -14,59 +13,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20" # Specify the version of Node.js you're using
+          node-version: "20"
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run TypeScript type check
       - name: TypeScript Type Checking
         run: npm run type-check
 
-      # Run tests
       - name: Run tests
         run: npm run test
 
-      # Run linting
       - name: Run lint
         run: npm run lint
 
-      # Security vulnerability scanning using npm audit
       - name: Security Vulnerability Scanning
         run: npm audit --audit-level=high
 
       - name: Set up Java 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # Install Eclipse Temurin distribution
+          distribution: 'temurin'
           java-version: '17'
 
       - name: Verify Java Version
         run: java -version
 
-      # Run Code Quality & Maintainability via SonarCloud
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          JAVA_HOME: /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
         with:
-          args: "-X"  # Enables full debug logging
+          args: "-X"
 
-      # Performance budget testing using Lighthouse CI
       - name: Performance Budget Tests (Lighthouse)
         uses: treosh/lighthouse-ci-action@v7
         with:
-          urls: https://staging.andrewmorrison.dev/ # Replace with your app's URL
+          urls: https://staging.andrewmorrison.dev/
 
   accessibility:
     needs: test-and-lint
@@ -76,23 +65,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js environment for accessibility checks
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20"
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Start the app for accessibility testing (adjust the command as needed)
       - name: Start the application
         run: npm run start &
         env:
           NODE_ENV: test
 
-      # Run Pa11y accessibility checks
       - name: Run Pa11y CI for accessibility checks
         run: npx pa11y-ci
 
@@ -104,17 +89,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js environment for E2E testing
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20"
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run End-to-End Testing using Cypress
       - name: Run Cypress E2E tests
         uses: cypress-io/github-action@v2
       
@@ -126,7 +108,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Run bundle size monitoring
       - name: Check bundle size
         run: npx size-limit
 
@@ -138,7 +119,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Run Jest tests with coverage
       - name: Run Jest tests with coverage
         run: npm run test -- --coverage
 
@@ -150,20 +130,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Run Caching Strategy Validation
       - name: Validate caching strategy
         run: npm run check-caching
 
   api-contract-testing:
     needs: caching-validation
     runs-on: ubuntu-latest
-    if: always()  # Skip if no API in the project, adjust this condition if needed
+    if: always()
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Run API Contract Testing (skip if no API)
       - name: Run Pact tests
         run: npm run pact
 
@@ -175,21 +153,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Environment-specific tests (staging, production)
       - name: Run environment-specific tests
         run: npm run test:staging
 
-  # Deploy job that depends on all other checks
   deploy:
-    needs: environment-specific-tests # Only runs if all previous checks succeed
+    needs: environment-specific-tests
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Deploy to Vercel
       - name: Deploy to Vercel
         run: vercel --prod
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Reference the Vercel token from GitHub Secrets
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
