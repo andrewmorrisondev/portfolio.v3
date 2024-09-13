@@ -22,11 +22,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # Specify the version of Node.js you're using
+          node-version: "20" # Specify the version of Node.js you're using
 
       # Install dependencies
       - name: Install dependencies
         run: npm install
+
+      # Run TypeScript type check
+      - name: TypeScript Type Checking
+        run: npm run type-check
 
       # Run tests
       - name: Run tests
@@ -36,7 +40,25 @@ jobs:
       - name: Run lint
         run: npm run lint
 
-  # New accessibility job added here
+      # Security vulnerability scanning using npm audit
+      - name: Security Vulnerability Scanning
+        run: npm audit --audit-level=high
+
+      # Run Code Quality & Maintainability via SonarCloud
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v1
+        with:
+          projectBaseDir: .
+          args: '-Dsonar.projectKey=<your_project_key>' # Update with your project key
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # Performance budget testing using Lighthouse CI
+      - name: Performance Budget Tests (Lighthouse)
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: https://andrewmorrison.dev/ # Replace with your app's URL
+
   accessibility:
     needs: test-and-lint
     runs-on: ubuntu-latest
@@ -65,9 +87,92 @@ jobs:
       - name: Run Pa11y CI for accessibility checks
         run: npx pa11y-ci
 
-  # Deploy job that depends on the accessibility job
+  e2e-tests:
+    needs: accessibility
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment for E2E testing
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run End-to-End Testing using Cypress
+      - name: Run Cypress E2E tests
+        uses: cypress-io/github-action@v2
+      
+  bundle-size-monitoring:
+    needs: e2e-tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Run bundle size monitoring
+      - name: Check bundle size
+        run: npx size-limit
+
+  coverage-report:
+    needs: bundle-size-monitoring
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Run Jest tests with coverage
+      - name: Run Jest tests with coverage
+        run: npm run test -- --coverage
+
+  caching-validation:
+    needs: coverage-report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Run Caching Strategy Validation
+      - name: Validate caching strategy
+        run: npm run check-caching
+
+  api-contract-testing:
+    needs: caching-validation
+    runs-on: ubuntu-latest
+    if: always()  # Skip if no API in the project, adjust this condition if needed
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Run API Contract Testing (skip if no API)
+      - name: Run Pact tests
+        run: npm run pact
+
+  environment-specific-tests:
+    needs: api-contract-testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Environment-specific tests (staging, production)
+      - name: Run environment-specific tests
+        run: npm run test:staging
+
+  # Deploy job that depends on all other checks
   deploy:
-    needs: accessibility # Only runs if accessibility checks succeed
+    needs: environment-specific-tests # Only runs if all previous checks succeed
     runs-on: ubuntu-latest
 
     steps:
