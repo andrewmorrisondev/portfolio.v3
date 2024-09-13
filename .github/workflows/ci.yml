@@ -58,6 +58,7 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@v1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          JAVA_HOME: /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
         with:
           args: "-X"  # Enables full debug logging
 
@@ -65,7 +66,7 @@ jobs:
       - name: Performance Budget Tests (Lighthouse)
         uses: treosh/lighthouse-ci-action@v7
         with:
-          urls: https://andrewmorrison.dev/ # Replace with your app's URL
+          urls: https://staging.andrewmorrison.dev/ # Replace with your app's URL
 
   accessibility:
     needs: test-and-lint
