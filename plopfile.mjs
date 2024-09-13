@@ -2,7 +2,7 @@ export default (plop) => {
   plop.setHelper("kebab-case", function (text) {
     // Replace uppercase letters with kebab-case and make the first letter lowercase
     return text
-      .replace(/([a-z])([A-Z])/g, '$1-$2') // Add a hyphen before uppercase letters
+      .replace(/([a-z])([A-Z])/g, "$1-$2") // Add a hyphen before uppercase letters
       .toLowerCase(); // Convert all characters to lowercase
   });
 

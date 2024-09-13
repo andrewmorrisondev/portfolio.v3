@@ -20,7 +20,7 @@ SHELL := /bin/zsh
 .SHELLFLAGS := -c 'source ~/.zshrc && exec zsh'
 
 # Dev: Install dependencies, run the dev server and Tailwind in development mode
-dev: project
+dev:
 	@$(NPM) run dev
 
 # Target: Clean build artifacts
@@ -28,7 +28,6 @@ clean:
 	@echo "Cleaning build artifacts..."
 	@rm -rf .next
 	@rm -rf build
-	@$(NPM) test -- -u
 	@echo -e "$(GREEN)Cleaned up build artifacts$(RESET)"
 
 # Target: Run project tasks
