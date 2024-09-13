@@ -1,6 +1,5 @@
 name: CI Pipeline
 
-# Run this workflow on push and pull requests to the main branch
 on:
   push:
     branches:
@@ -14,68 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js environment
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18" # Specify the version of Node.js you're using
-
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Run tests
-      - name: Run tests
-        run: npm run test
-
-      # Run linting
-      - name: Run lint
-        run: npm run lint
-
-  # New accessibility job added here
-  accessibility:
-    needs: test-and-lint
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Set up Node.js environment for accessibility checks
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20"
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Start the app for accessibility testing (adjust the command as needed)
-      - name: Start the application
-        run: npm run start &
-        env:
-          NODE_ENV: test
+      - name: TypeScript Type Checking
+        run: npm run type-check
 
-      # Run Pa11y accessibility checks
-      - name: Run Pa11y CI for accessibility checks
-        run: npx pa11y-ci
+      - name: Run tests
+        run: npm run test
 
-  # Deploy job that depends on the accessibility job
-  deploy:
-    needs: accessibility # Only runs if accessibility checks succeed
-    runs-on: ubuntu-latest
+      - name: Run lint
+        run: npm run lint
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Security Vulnerability Scanning
+        run: npm audit --audit-level=high
 
-      # Deploy to Vercel
-      - name: Deploy to Vercel
-        run: vercel --prod
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Reference the Vercel token from GitHub Secrets
+      - name: Performance Budget Tests (Lighthouse)
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: https://staging.andrewmorrison.dev/  # Replace with your app's URL
