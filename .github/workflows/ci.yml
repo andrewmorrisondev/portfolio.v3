@@ -36,14 +36,45 @@ jobs:
       - name: Run lint
         run: npm run lint
 
-  # Deploy job that depends on the test-and-lint job
-  deploy:
-    needs: test-and-lint # Only runs if test-and-lint succeeds
+  # New accessibility job added here
+  accessibility:
+    needs: test-and-lint
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Set up Node.js environment for accessibility checks
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Start the app for accessibility testing (adjust the command as needed)
+      - name: Start the application
+        run: npm run start &
+        env:
+          NODE_ENV: test
+
+      # Run Pa11y accessibility checks
+      - name: Run Pa11y CI for accessibility checks
+        run: npx pa11y-ci
+
+  # Deploy job that depends on the accessibility job
+  deploy:
+    needs: accessibility # Only runs if accessibility checks succeed
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Deploy to Vercel
       - name: Deploy to Vercel
         run: vercel --prod
         env:
