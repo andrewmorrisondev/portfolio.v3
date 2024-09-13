@@ -44,12 +44,15 @@ jobs:
       - name: Security Vulnerability Scanning
         run: npm audit --audit-level=high
 
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Install Eclipse Temurin distribution
+          java-version: '17'
+
       # Run Code Quality & Maintainability via SonarCloud
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v1
-        with:
-          projectBaseDir: .
-          args: '-Dsonar.projectKey=<your_project_key>' # Update with your project key
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
