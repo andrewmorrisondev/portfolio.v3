@@ -82,10 +82,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Performance Budget Tests (Lighthouse)
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v7
         with:
-          urls: https://staging.andrewmorrison.dev/ # Replace with your app's URL
+          configPath: .lighthouserc.json
 
   post-deployment-monitoring:
     needs: performance

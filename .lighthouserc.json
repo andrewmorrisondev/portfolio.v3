@@ -1,0 +1,20 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "https://www.andrewmorrison.dev",
+        "https://andrewmorrison.dev",
+        "https://staging.andrewmorrison.dev"
+      ]
+    },
+    "assert": {
+      "assertions": {
+        "first-contentful-paint": ["warn", {"maxNumericValue": 2000}],
+        "interactive": ["warn", {"maxNumericValue": 5000}]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
