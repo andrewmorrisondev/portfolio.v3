@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Typography, Paper, Link } from "@mui/material";
 
 const ResponsiveResume = (): JSX.Element => {

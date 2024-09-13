@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -9,34 +9,55 @@ on:
       - main
 
 jobs:
-  test-and-lint:
+  cache:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
         with:
-          node-version: "20"
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: npm install
+  lint:
+    needs: cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run lint
+        run: npm run lint
 
+  test:
+    needs: cache
+    runs-on: ubuntu-latest
+    steps:
       - name: TypeScript Type Checking
         run: npm run type-check
 
       - name: Run tests
         run: npm run test
 
-      - name: Run lint
-        run: npm run lint
-
       - name: Security Vulnerability Scanning
         run: npm audit --audit-level=high
 
+      - name: Accessibility Checks
+        run: npx pa11y-ci
+
+  performance:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
       - name: Performance Budget Tests (Lighthouse)
         uses: treosh/lighthouse-ci-action@v7
         with:
-          urls: https://staging.andrewmorrison.dev/  # Replace with your app's URL
+          urls: https://staging.andrewmorrison.dev/ # Replace with your app's URL
+
+  post-deployment-monitoring:
+    needs: performance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Monitoring Post-Deployment
+        run: npm run deploy-monitoring # Replace with appropriate command for Datadog/New Relic

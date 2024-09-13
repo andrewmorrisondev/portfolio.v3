@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tester Component matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-6fm6rz-MuiPaper-root-MuiCard-root"
+    data-testid="tester-test"
+    style="--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);"
+  >
+    <h1>
+      Tester
+    </h1>
+    <button>
+      Click me
+    </button>
+    <p>
+      We are working hard to bring you a great experience.
+    </p>
+  </div>
+</DocumentFragment>
+`;
