@@ -5,8 +5,6 @@ export default (plop) => {
       .replace(/([a-z])([A-Z])/g, '$1-$2') // Add a hyphen before uppercase letters
       .toLowerCase(); // Convert all characters to lowercase
   });
-  
-  
 
   plop.setGenerator("component", {
     description:
