@@ -11,7 +11,7 @@ RESET = \033[0m
 
 define CHECK
 	@echo -n "$1... "
-	@$(2) > /dev/null 2>&1 && echo -e "$(GREEN)✓$(RESET)" || echo -e "$(RED)✗$(RESET)"
+	@$(2) > /dev/null 2>&1 && echo -e "$(GREEN)✓$(RESET)" || { echo -e "$(RED)✗$(RESET)"; $(2); }
 endef
 
 # Source environment at the start of the shell
@@ -33,11 +33,11 @@ clean:
 # Target: Run project tasks
 project: clean
 	$(call CHECK, "Install dependencies", $(NPM) install)
-	$(call CHECK, "Format code", npx prettier --write .)
-	$(call CHECK, "Lint code", $(NPM) run lint -- --fix)
-	$(call CHECK, "Run tests", $(NPM) run test -- -u)
-	$(call CHECK, "Build project", $(NEXT) build)
-	$(call CHECK, "Build Tailwind CSS", $(TAILWIND) -i ./app/globals.css --minify)
+	$(call CHECK, "Format code.........", npx prettier --write .)
+	$(call CHECK, "Lint code...........", $(NPM) run lint -- --fix)
+	$(call CHECK, "Run tests...........", $(NPM) run test -- -u)
+	$(call CHECK, "Build project.......", $(NEXT) build)
+	$(call CHECK, "Build Tailwind CSS..", $(TAILWIND) -i ./app/globals.css --minify)
 
 new-component:
 	@$(NPM) run create-component

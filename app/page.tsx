@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Box, ThemeProvider, CssBaseline } from "@mui/material";
 import ImageCard from "./components/ImageCard";
 import CardWithButton from "./components/CardWithButton";
-import ResponsiveResume from "./components/ResponsiveResume";
+import ResponsiveResume from "./components/ResponsiveResume/ResponsiveResume";
 import getTheme from "./theme";
 import "./globals.css";
 
@@ -43,7 +43,7 @@ export default function Home(): JSX.Element {
           <CardWithButton toggleTheme={toggleTheme} mode={mode} />
         </Box>
       </Box>
-      <ResponsiveResume />
+      <ResponsiveResume theme={theme} />
     </ThemeProvider>
   );
 }
