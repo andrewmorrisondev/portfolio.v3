@@ -22,7 +22,7 @@ const HeaderSection: React.FC = () => (
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
         <Link
-          href="http://github.com/andrewmorrisondev"
+          href="https://github.com/andrewmorrisondev"
           target="_blank"
           rel="noopener"
         >
