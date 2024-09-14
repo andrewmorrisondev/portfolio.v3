@@ -1,6 +1,5 @@
-// biome-ignore lint/style/useImportType: <explanation>
 import React from "react";
-import { Card, CardContent, Typography, Button } from "@mui/material";
+import { Card, CardContent, Typography, Button, Box } from "@mui/material";
 
 interface CardWithButtonProps {
   mode: "light" | "dark";
@@ -12,7 +11,7 @@ const CardWithButton: React.FC<CardWithButtonProps> = ({
   toggleTheme,
 }) => {
   return (
-    <Card sx={{ maxWidth: 500, margin: "0 auto" }}>
+    <Card sx={{ maxWidth: 900, margin: "0 auto" }}>
       <CardContent>
         <Typography
           variant="h5"
@@ -20,29 +19,28 @@ const CardWithButton: React.FC<CardWithButtonProps> = ({
           sx={{
             fontSize: {
               xs: "1.2rem",
-              sm: "1.5rem",
-              md: "2rem",
+              sm: "1.4rem",
+              md: "1.5rem",
             },
+            textAlign: "center",
           }}
         >
           Andrew Morrison | Software Engineer
         </Typography>
-        <Button
-          variant="contained"
-          color="primary"
+
+        <Box
           sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             marginTop: 2,
-            display: "block",
-            mx: {
-              xs: "auto",
-              md: 0,
-            },
-            textAlign: "center",
+            height: "100px",
           }}
-          onClick={toggleTheme}
         >
-          {mode === "light" ? "Eyes Hurt?" : "Hate your eyes?"}
-        </Button>
+          <Button variant="contained" color="primary" onClick={toggleTheme}>
+            {mode === "light" ? "Eyes Hurt?" : "Hate your eyes?"}
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );
