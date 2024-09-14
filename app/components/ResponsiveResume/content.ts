@@ -11,7 +11,7 @@ import {
 // Define the content as per the interface
 const header: Header = {
   name: "Andrew Morrison",
-  title: "Sofrware Engineer",
+  title: "Software Engineer",
   email: "me@andrewmorrison.dev",
   location: "New York, NY",
   links: {
