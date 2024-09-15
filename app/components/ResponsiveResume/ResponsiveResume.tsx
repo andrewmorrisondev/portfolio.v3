@@ -31,6 +31,7 @@ const ResponsiveResume: React.FC<ResponsiveResumeProps> = ({ theme }) => {
           width: "100vw",
           backgroundColor: "background.default",
           padding: 4,
+          userSelect: "none",
         }}
       >
         <Header content={header} />

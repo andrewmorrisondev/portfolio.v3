@@ -26,7 +26,7 @@ export default function Home(): JSX.Element {
           alignItems: "center",
           height: "100vh",
           width: "100vw",
-          backgroundColor: "background.default",
+          backgroundColor: theme.palette.background.default,
         }}
       >
         <Box
