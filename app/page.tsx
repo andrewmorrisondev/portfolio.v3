@@ -1,49 +1,57 @@
 "use client";
 
-import { useState } from "react";
-import { Box, ThemeProvider, CssBaseline } from "@mui/material";
-import ImageCard from "./components/ImageCard";
-import CardWithButton from "./components/CardWithButton";
 import ResponsiveResume from "./components/ResponsiveResume/ResponsiveResume";
-import getTheme from "./theme";
 import "./globals.css";
+import Body from "./components/Body/Body";
+import Hero from "./components/Hero/Hero";
+import Sidebar from "./components/Sidebar/Sidebar"; // Import Sidebar component
+import { useState } from "react";
+import { IconButton, Box } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Home(): JSX.Element {
-  const [mode, setMode] = useState<"light" | "dark">("dark");
-  const theme = getTheme({ mode });
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const drawerWidth = 250; // Width of the drawer
 
-  const toggleTheme = (): void => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  const toggleDrawer = (open: boolean) => () => {
+    setDrawerOpen(open);
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box
+    <>
+      {/* Sidebar (Drawer) component */}
+      <Sidebar
+        isDrawerOpen={isDrawerOpen}
+        toggleDrawer={toggleDrawer}
+        drawerWidth={drawerWidth}
+      />
+
+      {/* Menu button to open the Sidebar */}
+      <IconButton
+        onClick={toggleDrawer(true)}
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          width: "100vw",
-          backgroundColor: theme.palette.background.default,
+          position: "fixed", // Keep the button fixed on the page
+          top: "1rem",
+          left: "1rem",
+          zIndex: 1000, // Ensure the button is above other elements
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: {
-              xs: "column",
-              md: "row",
-            },
-            gap: 2,
-          }}
-        >
-          <ImageCard />
-          <CardWithButton toggleTheme={toggleTheme} mode={mode} />
-        </Box>
+        <MenuIcon />
+      </IconButton>
+
+      {/* Main content */}
+      <Box
+        component="main"
+        sx={{
+          transition: "margin-left 0.3s ease", // Smooth transition
+          marginLeft: isDrawerOpen ? `${drawerWidth}px` : 0, // Shift content when drawer is open
+        }}
+      >
+        <Body isDrawerOpen={isDrawerOpen} drawerWidth={drawerWidth}>
+          <Hero />
+          <ResponsiveResume />
+        </Body>
       </Box>
-      <ResponsiveResume theme={theme} />
-    </ThemeProvider>
+    </>
   );
 }
