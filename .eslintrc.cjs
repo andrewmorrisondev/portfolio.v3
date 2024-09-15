@@ -18,6 +18,7 @@ module.exports = {
   // Base ESLint configuration
   extends: [
     "eslint:recommended", // Use recommended ESLint rules
+    "plugin:@typescript-eslint/recommended", // TypeScript ESLint rules
     "plugin:prettier/recommended", // Prettier integration for formatting
     "next",
     "next/core-web-vitals",
@@ -92,11 +93,16 @@ module.exports = {
         "plugin:@typescript-eslint/recommended", // TypeScript recommended rules
         "plugin:import/recommended", // Import plugin for better import resolution
         "plugin:import/typescript", // TypeScript support for import plugin
+        "plugin:prettier/recommended", // Integrate Prettier rules
       ],
       rules: {
         "@typescript-eslint/no-unused-vars": [
           "error",
-          { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }, // Ignore unused vars prefixed with "_"
+          {
+            argsIgnorePattern: "^_",
+            varsIgnorePattern: "^_",
+            varsIgnorePattern: "^React$", // Ignore unused `React` variables
+          },
         ],
         "@typescript-eslint/explicit-function-return-type": [
           "error",
@@ -106,6 +112,7 @@ module.exports = {
           },
         ],
         "@typescript-eslint/no-non-null-assertion": "warn", // Warn about non-null assertions
+        "prettier/prettier": "error", // Enforce Prettier rules as errors
       },
     },
 

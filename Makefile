@@ -4,27 +4,40 @@ NPM := npm
 NEXT := npx next
 TAILWIND := npx tailwindcss
 
+# Colors
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+
+define CHECK
+	@echo -n "$1... "
+	@$(2) > /dev/null 2>&1 && echo -e "$(GREEN)✓$(RESET)" || { echo -e "$(RED)✗$(RESET)"; $(2); }
+endef
+
 # Source environment at the start of the shell
 .ONESHELL:
 SHELL := /bin/zsh
 .SHELLFLAGS := -c 'source ~/.zshrc && exec zsh'
 
 # Dev: Install dependencies, run the dev server and Tailwind in development mode
-dev: build
+dev:
 	@$(NPM) run dev
 
-# Build: Clean build artifacts, install dependencies, run linting, build Next.js, and Tailwind for production
-build: clean
-	@$(NPM) install
-	@npx prettier --write .
-	@$(NPM) run lint -- --fix # Removed --config tsconfig.next.json
-	@$(NPM) run test -- -u
-	@$(NEXT) build
-	@$(TAILWIND) -i ./app/globals.css --minify
-
-# Clean build artifacts
+# Target: Clean build artifacts
 clean:
+	@echo "Cleaning build artifacts..."
 	@rm -rf .next
 	@rm -rf build
-	@echo "Cleaned up build artifacts."
+	@echo -e "$(GREEN)Cleaned up build artifacts$(RESET)"
 
+# Target: Run project tasks
+project: clean
+	$(call CHECK, "Install dependencies", $(NPM) install)
+	$(call CHECK, "Format code.........", npx prettier --write .)
+	$(call CHECK, "Lint code...........", $(NPM) run lint -- --fix)
+	$(call CHECK, "Run tests...........", $(NPM) run test -- -u)
+	$(call CHECK, "Build project.......", $(NEXT) build)
+	$(call CHECK, "Build Tailwind CSS..", $(TAILWIND) -i ./app/globals.css --minify)
+
+new-component:
+	@$(NPM) run create-component
