@@ -1,42 +1,61 @@
 import { createTheme, Theme } from "@mui/material/styles";
 
-type ThemeOptions = {
-  mode: "light" | "dark";
-};
+// Extend the ThemeOptions type to include accent1 and accent2
+declare module "@mui/material/styles" {
+  interface Palette {
+    accent1: string;
+    accent2: string;
+  }
+  interface PaletteOptions {
+    accent1?: string;
+    accent2?: string;
+  }
+}
 
-const getTheme = ({ mode }: ThemeOptions): Theme => {
+interface ColorOptions {
+  primary: string;
+  secondary: string;
+  backgroundDefault: string;
+  backgroundPaper: string;
+  textPrimary: string;
+  textSecondary: string;
+  accent1: string;
+  accent2: string;
+}
+
+const getTheme = (options: {
+  mode: "light" | "dark";
+  colors: ColorOptions;
+}): Theme => {
   return createTheme({
     palette: {
-      mode: mode,
+      mode: options.mode,
       primary: {
-        main: mode === "light" ? "#464646" : "#e3e9ea",
+        main: options.colors.primary,
       },
       secondary: {
-        main: mode === "light" ? "#3d3d3d" : "#a4b6bc",
+        main: options.colors.secondary,
       },
       background: {
-        default: mode === "light" ? "#f5f5f5" : "#333A3F",
-        paper: mode === "light" ? "#ffffff" : "#424242", // Paper background
+        default: options.colors.backgroundDefault,
+        paper: options.colors.backgroundPaper,
       },
-      error: {
-        main: "#f44336",
+      text: {
+        primary: options.colors.textPrimary,
+        secondary: options.colors.textSecondary,
       },
-      success: {
-        main: "#66bb6a",
-      },
-      warning: {
-        main: "#ffa726",
-      },
-      contrastThreshold: 4.5, // Ensures text contrast accessibility
+      accent1: options.colors.accent1,
+      accent2: options.colors.accent2,
     },
     typography: {
       fontFamily: "'Roboto', 'Arial', sans-serif",
-      fontSize: 16, // Base font size (industry standard for accessibility)
+      fontSize: 16,
       h1: {
         fontSize: "3rem", // 48px
         fontWeight: 700,
         lineHeight: 1.2,
         letterSpacing: "-0.01562em",
+        color: options.colors.textPrimary, // Added text color
         [`@media (max-width:960px)`]: {
           fontSize: "2.5rem", // 40px
         },
@@ -49,6 +68,7 @@ const getTheme = ({ mode }: ThemeOptions): Theme => {
         fontWeight: 600,
         lineHeight: 1.3,
         letterSpacing: "-0.00833em",
+        color: options.colors.textPrimary, // Added text color
         [`@media (max-width:960px)`]: {
           fontSize: "2rem", // 32px
         },
@@ -61,6 +81,7 @@ const getTheme = ({ mode }: ThemeOptions): Theme => {
         fontWeight: 500,
         lineHeight: 1.4,
         letterSpacing: "0em",
+        color: options.colors.textPrimary, // Added text color
         [`@media (max-width:960px)`]: {
           fontSize: "1.5rem", // 24px
         },
@@ -71,6 +92,7 @@ const getTheme = ({ mode }: ThemeOptions): Theme => {
       body1: {
         fontSize: "1rem", // 16px for paragraph text
         lineHeight: 1.5,
+        color: options.colors.textPrimary, // Added text color for body text
         [`@media (max-width:960px)`]: {
           fontSize: "0.9375rem", // 15px
         },
@@ -105,9 +127,9 @@ const getTheme = ({ mode }: ThemeOptions): Theme => {
           body: {
             margin: 0,
             padding: 0,
-            backgroundColor: mode === "light" ? "#ffffff" : "#121212",
-            color: mode === "light" ? "#333" : "#e3e3e3",
-            transition: "background-color 0.3s ease", // Smooth transition for theme changes
+            backgroundColor: options.colors.backgroundDefault,
+            color: options.colors.textPrimary,
+            transition: "background-color 0.3s ease", // Smooth transitions
           },
         },
       },
@@ -119,11 +141,11 @@ const getTheme = ({ mode }: ThemeOptions): Theme => {
             fontSize: "1rem",
             fontWeight: 600,
             boxShadow:
-              mode === "light"
+              options.mode === "light"
                 ? "0px 2px 4px rgba(0, 0, 0, 0.1)"
                 : "0px 2px 4px rgba(0, 0, 0, 0.5)",
             "&:hover": {
-              backgroundColor: mode === "light" ? "#f0f0f0" : "#3a3a3a",
+              backgroundColor: options.mode === "light" ? "#f0f0f0" : "#3a3a3a",
             },
           },
         },
@@ -131,16 +153,16 @@ const getTheme = ({ mode }: ThemeOptions): Theme => {
       MuiTypography: {
         styleOverrides: {
           h1: {
-            color: mode === "light" ? "#000000" : "#ffffff",
+            color: options.colors.textPrimary, // Explicit text color for h1
           },
           h2: {
-            color: mode === "light" ? "#1a1a1a" : "#fafafa",
+            color: options.colors.textPrimary, // Explicit text color for h2
           },
           h3: {
-            color: mode === "light" ? "#333333" : "#dddddd",
+            color: options.colors.textPrimary, // Explicit text color for h3
           },
           body1: {
-            color: mode === "light" ? "#464646" : "#e0e0e0",
+            color: options.colors.textPrimary, // Explicit text color for body text
           },
         },
       },

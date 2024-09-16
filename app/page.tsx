@@ -4,28 +4,27 @@ import ResponsiveResume from "./components/ResponsiveResume/ResponsiveResume";
 import "./globals.css";
 import Body from "./components/Body/Body";
 import Hero from "./components/Hero/Hero";
-import Sidebar from "./components/Sidebar/Sidebar"; // Import Sidebar component
 import { useState } from "react";
 import { IconButton, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 export default function Home(): JSX.Element {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const drawerWidth = 250; // Width of the drawer
 
+  // Function to toggle the sidebar
   const toggleDrawer = (open: boolean) => () => {
     setDrawerOpen(open);
   };
 
   return (
     <>
-      {/* Sidebar (Drawer) component */}
       <Sidebar
         isDrawerOpen={isDrawerOpen}
         toggleDrawer={toggleDrawer}
         drawerWidth={drawerWidth}
-      />
-
+      ></Sidebar>
       {/* Menu button to open the Sidebar */}
       <IconButton
         onClick={toggleDrawer(true)}
@@ -38,7 +37,6 @@ export default function Home(): JSX.Element {
       >
         <MenuIcon />
       </IconButton>
-
       {/* Main content */}
       <Box
         component="main"

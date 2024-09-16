@@ -41,7 +41,7 @@ const Sidebar = ({
             alignItems: "center",
           }}
         >
-          <h3>Navigation Menu</h3>
+          <h3>Nothing to See here 👀</h3>
           <IconButton onClick={toggleDrawer(false)}>
             <CloseIcon /> {/* Close button inside the drawer */}
           </IconButton>

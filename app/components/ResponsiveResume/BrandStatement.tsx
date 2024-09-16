@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import ColorPickedPaper from "../ColorPickedPaper/ColorPickedPaper";
 
 interface BrandStatementContent {
   title: string;
@@ -15,7 +16,7 @@ const BrandStatement: React.FC<BrandStatementProps> = ({ content }) => {
   const { title, statement } = content;
 
   return (
-    <Paper sx={{ p: 3, mb: 3 }}>
+    <ColorPickedPaper>
       <Typography variant="h5" gutterBottom>
         {title}
       </Typography>
@@ -37,7 +38,7 @@ const BrandStatement: React.FC<BrandStatementProps> = ({ content }) => {
           <Typography variant="body1">{statement}</Typography>
         </Box>
       </motion.div>
-    </Paper>
+    </ColorPickedPaper>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Typography, Paper, Link } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
+import ColorPickedPaper from "../ColorPickedPaper/ColorPickedPaper";
 
 interface HeaderContent {
   name: string;
@@ -20,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
   const { name, title, email, location, links } = content;
 
   return (
-    <Paper sx={{ p: 3, mb: 3 }}>
+    <ColorPickedPaper>
       <Box
         sx={{
           backgroundColor: "rgba(255, 255, 255, 0.05)",
@@ -47,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
           </Link>
         </Box>
       </Box>
-    </Paper>
+    </ColorPickedPaper>
   );
 };
 

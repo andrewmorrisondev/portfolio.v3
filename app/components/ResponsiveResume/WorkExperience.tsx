@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Typography, Paper, List } from "@mui/material";
+import { Box, Typography, List } from "@mui/material";
 import BulletPoint from "./BulletPoint/BulletPoint";
+import ColorPickedPaper from "../ColorPickedPaper/ColorPickedPaper";
 
 interface WorkExperienceItem {
   title: string;
@@ -16,7 +17,7 @@ interface WorkExperienceProps {
 // Main component displaying the work experience section
 const WorkExperience: React.FC<WorkExperienceProps> = ({ content }) => {
   return (
-    <Paper sx={{ p: 3, mb: 3 }}>
+    <ColorPickedPaper>
       <Typography variant="h5" gutterBottom>
         Work Experience
       </Typography>
@@ -25,7 +26,7 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ content }) => {
           <WorkExperienceCard key={index} {...experience} />
         ))}
       </Box>
-    </Paper>
+    </ColorPickedPaper>
   );
 };
 

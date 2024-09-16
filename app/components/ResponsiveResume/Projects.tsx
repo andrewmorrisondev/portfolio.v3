@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import MotionBox from "../MotionBox/MotionBox";
+import ColorPickedPaper from "../ColorPickedPaper/ColorPickedPaper";
 
 // Define the interfaces
 interface Project {
@@ -15,7 +16,7 @@ interface ProjectsProps {
 
 // Main component displaying the projects section
 const Projects: React.FC<ProjectsProps> = ({ content }) => (
-  <Paper sx={{ p: 3, mb: 3, boxShadow: 3 }}>
+  <ColorPickedPaper>
     <Typography variant="h5" gutterBottom>
       Projects
     </Typography>
@@ -24,7 +25,7 @@ const Projects: React.FC<ProjectsProps> = ({ content }) => (
         <ProjectCard key={index} {...project} />
       ))}
     </Box>
-  </Paper>
+  </ColorPickedPaper>
 );
 
 // Separate component for individual project cards
