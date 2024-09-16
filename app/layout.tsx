@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { CustomThemeProvider } from "./context/ThemeContext";
+import { CssBaseline } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Andrew Morrison | Software Engineer",
-  description: "Andrew Morrisons Portfolio Website",
+  description: "Andrew Morrison's Portfolio Website",
 };
 
 export default function RootLayout({
@@ -13,7 +15,12 @@ export default function RootLayout({
 }>): JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <CustomThemeProvider>
+          <CssBaseline />
+          {children}
+        </CustomThemeProvider>
+      </body>
     </html>
   );
 }

@@ -1,18 +1,44 @@
-// biome-ignore lint/style/useImportType: <explanation>
 import React from "react";
+import { Box, Typography, Container, Paper } from "@mui/material";
 
 const UnderConstruction: React.FC = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-gray-200">
-      <div className="bg-gray-800 shadow-lg rounded-lg p-8 max-w-md text-center">
-        <h1 className="text-3xl font-bold mb-4 text-yellow-500">
-          🚧 Under Construction 🚧
-        </h1>
-        <p className="text-gray-400 mb-6">
-          We are working hard to bring you a great experience. Check back soon!
-        </p>
-      </div>
-    </div>
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+      bgcolor="grey.900"
+      color="grey.200"
+    >
+      <Container maxWidth="sm">
+        <Paper
+          elevation={3}
+          sx={{
+            backgroundColor: "grey.800",
+            padding: 4,
+            textAlign: "center",
+            borderRadius: 2,
+          }}
+        >
+          <Typography
+            variant="h3"
+            component="h1"
+            gutterBottom
+            sx={{ color: "yellow.500", fontWeight: "bold" }}
+          >
+            🚧 Under Construction 🚧
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ color: "grey.400", marginBottom: 2 }}
+          >
+            We are working hard to bring you a great experience. Check back
+            soon!
+          </Typography>
+        </Paper>
+      </Container>
+    </Box>
   );
 };
 

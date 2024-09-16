@@ -13,8 +13,8 @@ const BulletPoint = ({ point, key }: BulletPointProps): JSX.Element => {
 
   return (
     <motion.div
-      key={key}
       ref={ref}
+      id={`${key}`}
       initial={{ opacity: 0, y: 20 }} // Start with opacity 0 and y offset
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} // Animate when each bullet point is in view
       transition={{

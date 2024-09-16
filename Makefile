@@ -37,7 +37,6 @@ project: clean
 	$(call CHECK, "Lint code...........", $(NPM) run lint -- --fix)
 	$(call CHECK, "Run tests...........", $(NPM) run test -- -u)
 	$(call CHECK, "Build project.......", $(NEXT) build)
-	$(call CHECK, "Build Tailwind CSS..", $(TAILWIND) -i ./app/globals.css --minify)
 
 new-component:
 	@$(NPM) run create-component

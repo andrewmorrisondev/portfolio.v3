@@ -3,21 +3,26 @@
 exports[`UnderConstruction Component matches the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="flex items-center justify-center min-h-screen bg-gray-900 text-gray-200"
+    class="MuiBox-root css-1fvnu2c"
   >
     <div
-      class="bg-gray-800 shadow-lg rounded-lg p-8 max-w-md text-center"
+      class="MuiContainer-root MuiContainer-maxWidthSm css-zzzaw2-MuiContainer-root"
     >
-      <h1
-        class="text-3xl font-bold mb-4 text-yellow-500"
+      <div
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 css-64dfqm-MuiPaper-root"
+        style="--Paper-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12);"
       >
-        🚧 Under Construction 🚧
-      </h1>
-      <p
-        class="text-gray-400 mb-6"
-      >
-        We are working hard to bring you a great experience. Check back soon!
-      </p>
+        <h1
+          class="MuiTypography-root MuiTypography-h3 MuiTypography-gutterBottom css-1kqnfi5-MuiTypography-root"
+        >
+          🚧 Under Construction 🚧
+        </h1>
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-12e6pwo-MuiTypography-root"
+        >
+          We are working hard to bring you a great experience. Check back soon!
+        </p>
+      </div>
     </div>
   </div>
 </DocumentFragment>

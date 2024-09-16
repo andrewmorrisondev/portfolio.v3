@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import MotionBox from "../MotionBox/MotionBox"; // Import the MotionBox component
+import ColorPickedPaper from "../ColorPickedPaper/ColorPickedPaper";
 
 interface EducationContent {
   degree: string;
@@ -14,7 +15,7 @@ interface EducationProps {
 
 const Education: React.FC<EducationProps> = ({ content }) => {
   return (
-    <Paper sx={{ p: 3, mb: 3 }}>
+    <ColorPickedPaper>
       <Typography variant="h5" gutterBottom>
         Education
       </Typography>
@@ -33,7 +34,7 @@ const Education: React.FC<EducationProps> = ({ content }) => {
           ))}
         </Box>
       </MotionBox>
-    </Paper>
+    </ColorPickedPaper>
   );
 };
 
