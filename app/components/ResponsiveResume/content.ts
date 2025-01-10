@@ -72,15 +72,15 @@ const workExperience: WorkExperience[] = [
 
 const education: Education[] = [
   {
-    degree: "B.M. in Music Education, Opera and Voice Concentration",
-    institution:
-      "Crane School of Music, State University of New York at Potsdam",
-    year: "2017",
-  },
-  {
     degree: "Software Engineering Intensive",
     institution: "General Assembly",
     year: "2023",
+  },
+  {
+    degree: "Performance Certificate, Vocal and Opera",
+    institution:
+      "Crane School of Music, State University of New York at Potsdam",
+    year: "2018",
   },
 ];
 
